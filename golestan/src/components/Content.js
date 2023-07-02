@@ -1,13 +1,65 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Content.css';
+import ItemBox from "./ItemBox";
 
-const Content = () => {
+const Content = ({selected}) => {
+    const students = [{name: "سعید زارع"},{name: "اصغر مرادی"},{name: "اکبر"},{name: "اکبری"},{name: "سعید زارع"},{name: "سعید زارع"},{name: "سعید زارع"},{name: "سعید زارع"},{name: "سعید زارع"}];
+    const teachers = [{name: "Ali"},{name: "Ali"},{name: "Ali"},{name: "Ali"},{name: "Ali"},{name: "Ali"},{name: "Saeed"},{name: "Saeed"},{name: "Saeed"},{name: "Saeed"},{name: "Saeed"},{name: "Saeed"},{name: "Saeed"}];
+    const managers = [{name: "Ali"},{name: "Saeed"},{name: "Saeed"},{name: "Saeed"}];
+
+    let items;
+    let type_string;
+    const [searchInput, setSearchInput] = useState("");
+
+    if (selected === "2") {
+        items = managers.slice(0, 9);
+        type_string = "مدیر";
+    } else if (selected === "1") {
+        items = teachers.slice(0, 9);
+        type_string = "استاد";
+    } else {
+        items = students.slice(0, 9);
+        type_string = "دانشجوی";
+    }
+
+    let more = ''
+    if (items.length === 9) {
+        more = 'مشاهده بیشتر';
+    }
+
+    const handleChange = (e) => {
+        e.preventDefault();
+        setSearchInput(e.target.value);
+    };
+
+    if (searchInput.length > 0) {
+        items.filter((item) => {
+            return item.name.match(searchInput);
+        });
+    }
+
+
     return (
         <main className="content">
-            <h2>Welcome to My Website</h2>
-            <p>
-                This is the main content area. You can add your content here.
-            </p>
+            <div className="header-content">
+                <p>مشاهده  {type_string}ان</p>
+                <p> + اضافه کردن {type_string}ان </p>
+            </div>
+            <hr />
+            <input className="searchbar" placeholder={"جستجوی " + type_string}  onChange={handleChange}
+                   value={searchInput}/>
+            <div className="flex-container-wrapper">
+                <div className="flex-container">
+                    {items.filter((item) => {
+                        return item.name.match(searchInput);
+                    }).map(item =>
+                        <ItemBox name={item.name} text="حذف"/>
+                    )}
+                </div>
+                <p>{more}</p>
+            </div>
+
+
         </main>
     );
 };

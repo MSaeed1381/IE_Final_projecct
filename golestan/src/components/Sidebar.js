@@ -1,14 +1,14 @@
 import React from 'react';
 import './Sidebar.css';
 
-const Sidebar = () => {
+const Sidebar = ({items, setSelected}) => {
     return (
         <aside className="sidebar">
             <nav>
                 <ul>
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Contact</li>
+                    {items.map((item, index) => (
+                        <li onClick={()=>{setSelected(index+"")}}>{item}</li>
+                    ))}
                 </ul>
             </nav>
         </aside>

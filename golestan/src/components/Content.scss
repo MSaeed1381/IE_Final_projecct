@@ -1,0 +1,30 @@
+.flex-container {
+  display: flex;
+  justify-content: space-around;
+  background-color: gray;
+  flex-wrap: wrap;
+  flex-direction: row;
+  background-color: white;
+  cursor: pointer;
+}
+
+.flex-container-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 80%;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 5rem;
+}
+
+.searchbar {
+  height: 1.5rem;
+  width: 20rem;
+  border: 1px solid black;
+}
