@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import './Content.css';
 import ItemBox from "./ItemBox";
+import StudentModal from "../components/modals/StudentModal";
+
 
 const Content = ({selected}) => {
     const students = [{name: "سعید زارع"},{name: "اصغر مرادی"},{name: "اکبر"},{name: "اکبری"},{name: "سعید زارع"},{name: "سعید زارع"},{name: "سعید زارع"},{name: "سعید زارع"},{name: "سعید زارع"}];
@@ -11,6 +13,7 @@ const Content = ({selected}) => {
     let type_string;
     const [searchInput, setSearchInput] = useState("");
     const [more, setMore] = useState("مشاهده بیشتر");
+    const [modal, setModal] = useState(false);
 
 
     if (selected === "2") {
@@ -31,15 +34,11 @@ const Content = ({selected}) => {
 
     };
 
-
-
-
-
     return (
         <main className="content">
             <div className="header-content">
                 <p>مشاهده  {type_string}ان</p>
-                <p> + اضافه کردن {type_string}ان </p>
+                <p className="add-person" onClick={() => setModal(!modal)}> + اضافه کردن {type_string}ان </p>
             </div>
             <hr />
             <input className="searchbar" placeholder={"جستجوی " + type_string}  onChange={handleChange}
@@ -49,11 +48,18 @@ const Content = ({selected}) => {
                     {items.filter((item) => {
                         return item.name.match(searchInput);
                     }).map(item =>
-                        <ItemBox name={item.name} text="حذف"/>
+                        <ItemBox name={item.name} text="حذف" />
                     )}
                 </div>
                 <p>{more}</p>
             </div>
+
+            {modal &&
+                    (
+                        <StudentModal modal={modal} setModal={setModal}/>
+                    )
+            }
+
         </main>
     );
 };
