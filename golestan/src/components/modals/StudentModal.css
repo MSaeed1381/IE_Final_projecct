@@ -15,8 +15,9 @@
 .modal-content {
   background-color: white;
   padding: 20px;
-  height: 20rem;
-  width: 50rem;
+  height: 30rem;
+  width: 55rem;
+  overflow: auto;
 }
 
 .modal-close {
@@ -37,6 +38,53 @@
 
 .student-model-cross {
   cursor: pointer;
+}
+
+form {
+  padding: 1rem;
+}
+
+form .student-model-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 20px;
+}
+
+form label {
+  margin-bottom: 10px;
+}
+
+form input[type=text] {
+  width: 20rem;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  margin: 1rem;
+}
+
+form input[type=submit] {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.student-model-form {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.student-model-item-box {
+  width: 20rem;
+  margin: 1rem;
 }
 
 /*# sourceMappingURL=StudentModal.css.map */
