@@ -11,7 +11,6 @@ const Content = ({selected}) => {
     const teachers = [{name: "Ali"},{name: "Ali"},{name: "Ali"},{name: "Ali"},{name: "Ali"},{name: "Ali"},{name: "Saeed"},{name: "Saeed"},{name: "Saeed"},{name: "Saeed"},{name: "Saeed"},{name: "Saeed"},{name: "Saeed"}];
     const managers = [{name: "Ali"},{name: "Saeed"},{name: "Saeed"},{name: "Saeed"}];
 
-    let items;
     let type_string;
     const [searchInput, setSearchInput] = useState("");
     const [more, setMore] = useState("مشاهده بیشتر");
@@ -35,16 +34,18 @@ const Content = ({selected}) => {
         console.log(data); // TODO create a request for excel
     }
 
+    let x;
     if (selected === "2") {
-        items = managers.slice(0, 9);
+        x = managers.slice(0, 9);
         type_string = "مدیر";
     } else if (selected === "1") {
-        items = teachers.slice(0, 9);
+        x = teachers.slice(0, 9);
         type_string = "استاد";
     } else {
-        items = students.slice(0, 9);
+        x = students.slice(0, 9);
         type_string = "دانشجوی";
     }
+    const [items, setItems] = useState(x);
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -68,8 +69,8 @@ const Content = ({selected}) => {
                 <div className="flex-container">
                     {items.filter((item) => {
                         return item.name.match(searchInput);
-                    }).map(item =>
-                        <ItemBox name={item.name} text="حذف" />
+                    }).map((item, index) =>
+                        <ItemBox name={item.name} text="حذف" index={index} setItems={setItems} items={items}/>
                     )}
                 </div>
                 <p>{more}</p>
