@@ -10,6 +10,8 @@ const Content = ({selected}) => {
     let items;
     let type_string;
     const [searchInput, setSearchInput] = useState("");
+    const [more, setMore] = useState("مشاهده بیشتر");
+
 
     if (selected === "2") {
         items = managers.slice(0, 9);
@@ -22,21 +24,15 @@ const Content = ({selected}) => {
         type_string = "دانشجوی";
     }
 
-    let more = ''
-    if (items.length === 9) {
-        more = 'مشاهده بیشتر';
-    }
-
     const handleChange = (e) => {
         e.preventDefault();
         setSearchInput(e.target.value);
+        setMore("");
+
     };
 
-    if (searchInput.length > 0) {
-        items.filter((item) => {
-            return item.name.match(searchInput);
-        });
-    }
+
+
 
 
     return (
@@ -58,8 +54,6 @@ const Content = ({selected}) => {
                 </div>
                 <p>{more}</p>
             </div>
-
-
         </main>
     );
 };
