@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import './Content.css';
 import ItemBox from "./ItemBox";
 import StudentModal from "../components/modals/StudentModal";
+import * as XLSX from 'xlsx';
+
 
 
 const Content = ({selected}) => {
@@ -14,7 +16,24 @@ const Content = ({selected}) => {
     const [searchInput, setSearchInput] = useState("");
     const [more, setMore] = useState("مشاهده بیشتر");
     const [modal, setModal] = useState(false);
+    const [data, setData] = useState([]);
 
+    let handleFileUpload = (e) => {
+        const reader = new FileReader();
+        reader.readAsBinaryString(e.target.files[0]);
+        reader.onload = (e) => {
+            const data = e.target.result;
+            const workbook = XLSX.read(data, {type: "binary"});
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            const parsedData = XLSX.utils.sheet_to_json(sheet);
+            setData(parsedData);
+        }
+    }
+
+    if (data.length > 0) {
+        console.log(data); // TODO create a request for excel
+    }
 
     if (selected === "2") {
         items = managers.slice(0, 9);
@@ -31,7 +50,6 @@ const Content = ({selected}) => {
         e.preventDefault();
         setSearchInput(e.target.value);
         setMore("");
-
     };
 
     return (
@@ -41,8 +59,11 @@ const Content = ({selected}) => {
                 <p className="add-person" onClick={() => setModal(!modal)}> + اضافه کردن {type_string}ان </p>
             </div>
             <hr />
-            <input className="searchbar" placeholder={"جستجوی " + type_string}  onChange={handleChange}
-                   value={searchInput}/>
+            <div className="searchbar-wrapper">
+                <input className="searchbar" placeholder={"جستجوی " + type_string}  onChange={handleChange}
+                       value={searchInput}/>
+                <input className="custom-file-input" type="file" accept=".xls, .xlsx" onChange={handleFileUpload} name="file"/>
+            </div>
             <div className="flex-container-wrapper">
                 <div className="flex-container">
                     {items.filter((item) => {
@@ -56,7 +77,7 @@ const Content = ({selected}) => {
 
             {modal &&
                     (
-                        <StudentModal modal={modal} setModal={setModal}/>
+                        <StudentModal modal={modal} setModal={setModal} type_string="دانشجو" type="student"/>
                     )
             }
 

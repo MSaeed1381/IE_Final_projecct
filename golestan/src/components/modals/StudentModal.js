@@ -1,7 +1,8 @@
 import React from 'react';
 import './StudentModal.css';
 
-const StudentModal = ({modal, setModal}) => {
+
+const StudentModal = ({modal, setModal, type_string, type}) => {
     const fields = ["حقوق" ,"رواشناسی" ,"ادبیات" ,"زمین شناسی" , "مهندسی کامپیوتر"]
     const colleges = ["حقوق" ,"رواشناسی" ,"ادبیات" ,"زمین شناسی" , "مهندسی کامپیوتر"]
 
@@ -10,7 +11,7 @@ const StudentModal = ({modal, setModal}) => {
 
             <div className="modal-content">
                 <div className="student-model-header">
-                    <p className="student-model-title"> ثبت/تغییر اطلاعات دانشجوی جدید </p>
+                    <p className="student-model-title"> ثبت/تغییر اطلاعات {type_string}ی جدید </p>
                     <p className="student-model-cross" onClick={() => {setModal(!modal)}}> ✖ </p>
                 </div>
 
@@ -48,7 +49,24 @@ const StudentModal = ({modal, setModal}) => {
                         <input type="text" id="level" name="level" required className="student-model-item"/>
                     </div>
 
-                    <input type="submit" value="ثبت" className="student-model-submit" />
+                    <input type="submit" value="ثبت" className="student-model-submit" onClick={() => {
+                        const $ = document
+                        let name = $.getElementById("name").value;
+                        let family = $.getElementById("family").value;
+                        let user_id = $.getElementById("user_id").value;
+                        let id = $.getElementById("id").value;
+                        let college = $.getElementById("college").value;
+                        let field = $.getElementById("field").value;
+                        let date = $.getElementById("date").value;
+                        let level = $.getElementById("level").value;
+
+                        let person = {
+                            name, family, user_id, id, college, field, date, level
+                        }
+                        console.log(person);
+
+                        setModal(!modal);
+                    }} />
                 </form>
             </div>
         </div>

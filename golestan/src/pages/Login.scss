@@ -3,7 +3,7 @@
   font-family: "B Lotus", serif;
 }
 
-.container, .form {
+.container, .form-login {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,4 +32,11 @@ button {
 #logo {
   height: 6rem;
   width: 6rem;
+}
+
+.header-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

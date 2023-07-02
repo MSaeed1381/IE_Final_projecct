@@ -4,10 +4,6 @@ import Button from "../components/Button";
 import React, { Component }  from 'react';
 import {useRef} from 'react';
 
-
-
-
-
 export default function Login() {
     const userRef = useRef(null);
     const passwordRef = useRef(null);
@@ -25,7 +21,7 @@ export default function Login() {
     return (
         <div>
             <form className="container">
-                <fieldset className="form">
+                <fieldset className="form-login">
                     <div className="header-login">
                         <h5>به نام خدا</h5>
                         <h2>دانشگاه شهید بهشتی</h2>

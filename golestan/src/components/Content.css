@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .flex-container {
   display: flex;
   justify-content: space-around;
@@ -31,6 +32,44 @@
 
 .add-person {
   cursor: pointer;
+}
+
+.searchbar-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.custom-file-input::before {
+  content: "-- آپلود اکسل --";
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.custom-file-input:hover::before {
+  border-color: black;
+}
+
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.custom-file-input {
+  direction: ltr;
 }
 
 /*# sourceMappingURL=Content.css.map */
