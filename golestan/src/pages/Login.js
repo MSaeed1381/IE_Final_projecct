@@ -3,24 +3,57 @@ import logo from "../images/logo.png"
 import Button from "../components/Button";
 import React, { Component }  from 'react';
 import {useRef} from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+
 
 export default function Login() {
     const userRef = useRef(null);
     const passwordRef = useRef(null);
+    const navigate = useNavigate();
 
-    const handleLogin = (username, password) =>{
-        const name = userRef.current.value;
+
+    const handleSubmit = async (event) => {
+        //Prevent page reload
+        event.preventDefault();
+
+        const user_id = userRef.current.value;
         const pass = passwordRef.current.value;
 
-        return name === username && pass === password;
-    }
+        let data = await axios({
+            // Endpoint to send files
+            url: "http://127.0.0.1:3000/login",
+            method: "POST",
+            headers: {
+                // Add any auth token here
+                'Access-Control-Allow-Origin': 'http://127.0.0.1:3001',
+                'Access-Control-Allow-Methods': 'POST',
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Content-Type': 'application/json',
 
-    const username = "1";
-    const password = "1";
+                //authorization: "your token comes here",
+            },
+
+            // Attaching the form data
+            data: {
+                'user_id': user_id,
+                'password': pass
+            },
+        });
+
+        data = data.data
+        // Compare user info
+        if (data.success) {
+            console.log(data);
+            navigate('/admin');
+        } else {
+            console.log('username of password is not correct');
+        }
+    };
 
     return (
         <div>
-            <form className="container">
+            <form className="container" method="POST" onSubmit={handleSubmit}>
                 <fieldset className="form-login">
                     <div className="header-login">
                         <h5>به نام خدا</h5>
@@ -38,7 +71,7 @@ export default function Login() {
                     </label>
 
 
-                    <Button text="ورود" path="/login" onclick={handleLogin}/>
+                    <input type="submit" value="ورود"/>
                 </fieldset>
             </form>
         </div>

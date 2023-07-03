@@ -13,7 +13,7 @@ function App() {
             <BrowserRouter>
                 <Routes>
                         <Route index element={<Login />} />
-                        <Route path="login" element={<AdminMainPage />} />
+                        <Route path="admin" element={<AdminMainPage />} />
 
                 </Routes>
             </BrowserRouter>

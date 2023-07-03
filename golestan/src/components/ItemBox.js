@@ -7,8 +7,7 @@ const ItemBox = ({name, text, index, setItems, items}) => {
         <div className="item-container">
             <div className="item-name"> {name} </div>
             <a className="item-text" onClick={() => {
-                let x = items.filter((item, i) => index !== i);
-                setItems(x);
+                items = items.filter((item, i) => index !== i);
                 console.log(items);
             }}> {text} </a>
         </div>
